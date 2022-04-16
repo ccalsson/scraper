@@ -1,0 +1,57 @@
+
+
+
+
+
+
+
+
+#importar lo que necesitamos
+
+desde request_html importar HTMLSession
+
+sesión = HTMLSesión()
+
+#usa la sesión para obtener la página
+
+r = sesión.get('https://news.google.com/topstories?hl=en-GB&gl=GB&ceid=GB:en')
+
+#procesa el html, sleep=1 para darle un segundo para que termine antes de continuar. scrolldown= cuántas veces hay que desplazarse hacia abajo en el navegador para obtener más resultados. 5 era un buen número aquí
+
+r.html.render(dormir=1, desplazarse hacia abajo=5)
+
+#encuentre todos los artículos utilizando el elemento de inspección y cree una lista en blanco
+
+artículos = r.html.find('artículo')
+
+lista de noticias = []
+
+#bucle a través de cada artículo para encontrar el título y el enlace. intente y excepto que los artículos repetidos de otras fuentes tienen etiquetas h diferentes.
+
+para artículo en artículos:
+
+    tratar:
+
+        newsitem = item.find('h3', first=True)
+
+        título = nuevositio.texto
+
+        link = newsitem.absolute_links
+
+        newsarticle = {
+
+            'title': title,
+
+            'link': link 
+
+        }
+
+        newslist.append(newsarticle)
+
+    except:
+
+       pass
+
+#print the length of the list
+
+print(len(newslist))
